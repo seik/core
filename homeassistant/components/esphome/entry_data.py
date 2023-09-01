@@ -321,7 +321,7 @@ class RuntimeEntryData:
             # then we need to migrate it from the old format if there is an entity with the old format
             if unique_id.startswith(
                 new_unique_id_prefix
-            ) and not ent_reg.async_get_entity_id(platform, DOMAIN, info.unique_id):
+            ) and unique_id.count("-") == 2 and not ent_reg.async_get_entity_id(platform, DOMAIN, info.unique_id):
                 possible_unique_id_migrations[unique_id] = info
 
         if possible_unique_id_migrations:
