@@ -268,11 +268,19 @@ class RuntimeEntryData:
             #
             # Older ESPHome versions have the following special cases:
             #
-            # <mac>-adc for esp8266 adc sensor only
-            # <mac>-hall for esp32 hall sensor only
+            # <mac>-adc - for esp8266 adc sensor only
+            # <mac>-hall - for esp32 hall sensor only
             # <mac>-uptime
             # <mac>-version
             # dallas-<dallas-address>
+            # <mac>-ethernetinfo - ip address when using ethernet
+            # <mac>-wifiinfo-ip
+            # <mac>-wifiinfo-dns
+            # <mac>-wifiinfo-scanresults
+            # <mac>-wifiinfo-ssid
+            # <mac>-wifiinfo-bssid
+            # <mac>-wifiinfo-macadr
+            # <mac>-wifisignal
             #
             possible_special_cases.add(unique_id)
 
