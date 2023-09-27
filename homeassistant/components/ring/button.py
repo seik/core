@@ -1,6 +1,7 @@
 """Component providing HA sensor support for Ring Buttons."""
 
 from __future__ import annotations
+
 from dataclasses import dataclass
 
 from homeassistant.components.button import ButtonEntity, ButtonEntityDescription
@@ -14,6 +15,10 @@ from . import DOMAIN
 from .entity import RingEntityMixin
 
 
+@dataclass
+class RingButtonEntityDescription(ButtonEntityDescription, RingRequiredKeysMixin):
+    kind: str | None = None
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: ConfigEntry,
@@ -21,7 +26,7 @@ async def async_setup_entry(
 ) -> None:
     devices = hass.data[DOMAIN][config_entry.entry_id]["devices"]
 
-    """Some accounts returned data without intercom devices"""
+    # Some accounts return data without intercom devices
     devices.setdefault("other", [])
 
     entities = [
@@ -39,11 +44,6 @@ async def async_setup_entry(
 class RingRequiredKeysMixin:
     category: list[str]
     cls: type[RingButton]
-
-
-@dataclass
-class RingButtonEntityDescription(ButtonEntityDescription, RingRequiredKeysMixin):
-    kind: str | None = None
 
 
 class RingDoorButton(RingEntityMixin, ButtonEntity):

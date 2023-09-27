@@ -27,17 +27,17 @@ async def async_setup_entry(
     """Set up a sensor for a Ring device."""
     devices = hass.data[DOMAIN][config_entry.entry_id]["devices"]
 
-    """Some accounts returned data without intercom devices"""
+    # Some accounts return data without intercom devices
     devices.setdefault("other", [])
 
     entities = [
         description.cls(config_entry.entry_id, device, description)
         for device_type in (
+            "authorized_doorbots",
             "chimes",
             "doorbots",
-            "authorized_doorbots",
-            "stickup_cams",
             "other",
+            "stickup_cams",
         )
         for description in SENSOR_TYPES
         if device_type in description.category
